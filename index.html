@@ -41,6 +41,31 @@ header p{
   margin:auto;
 }
 
+/* Loader under the banner */
+.loader{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  padding:18px 20px;
+  color:#ddd;
+}
+
+.spinner{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  border:4px solid rgba(255,255,255,0.12);
+  border-top-color:#fff;
+  animation:spin 1s linear infinite;
+}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.loader.hidden{display:none}
+
+.loader-text{color:#bbb; font-size:14px}
+
 .section{
   padding:60px 20px;
   max-width:1500px;
@@ -127,6 +152,12 @@ footer{
   </p>
 </header>
 
+<!-- Loader shown under the banner while beats/iframes load -->
+<div id="loader" class="loader" role="status" aria-live="polite">
+  <div class="spinner" aria-hidden="true"></div>
+  <div class="loader-text">Beats laden...</div>
+</div>
+
 <section class="section">
   <div class="beat-grid" id="beatGrid"></div>
 
@@ -169,6 +200,21 @@ const beats = [
 ];
 
 const grid = document.getElementById("beatGrid");
+const loader = document.getElementById('loader');
+let loadedCount = 0;
+const totalBeats = beats.length;
+
+function hideLoader(){
+  if(loader){
+    loader.classList.add('hidden');
+    loader.setAttribute('aria-hidden','true');
+  }
+}
+
+// Fallback: hide loader after 10s even if some iframes didn't fire load
+const loaderTimeout = setTimeout(()=>{
+  hideLoader();
+}, 10000);
 
 beats.forEach((beat)=>{
   const card = document.createElement("div");
@@ -188,10 +234,27 @@ beats.forEach((beat)=>{
   `;
 
   grid.appendChild(card);
+
+  // Add load handler for the iframe to count when media is ready
+  const iframe = card.querySelector('iframe');
+  if(iframe){
+    // Some browsers may not fire load for cross-origin iframe previews; still attempt to listen
+    iframe.addEventListener('load', ()=>{
+      loadedCount++;
+      if(loadedCount >= totalBeats){
+        clearTimeout(loaderTimeout);
+        hideLoader();
+      }
+    });
+  }
 });
+
+// If there are no beats, hide loader immediately
+if(totalBeats === 0){
+  hideLoader();
+}
 
 </script>
 
 </body>
 </html>
-
