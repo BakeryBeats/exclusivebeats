@@ -1,1 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VCDBZQW3KD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-VCDBZQW3KD');
+</script>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bakery Beats | Exclusive Vault</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#0b0c10;
+  color:#f5f5f5;
+}
+
+header{
+  text-align:center;
+  padding:90px 20px;
+  background:linear-gradient(135deg,#141622,#1f2233,#0f111a);
+}
+
+header h1{
+  font-size:48px;
+  margin-bottom:10px;
+}
+
+header p{
+  color:#aaa;
+  max-width:750px;
+  margin:auto;
+}
+
+/* Loader under the banner */
+.loader{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  padding:18px 20px;
+  color:#ddd;
+}
+
+.spinner{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  border:4px solid rgba(255,255,255,0.12);
+  border-top-color:#fff;
+  animation:spin 1s linear infinite;
+}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.loader.hidden{display:none}
+
+.loader-text{color:#bbb; font-size:14px}
+
+.section{
+  padding:60px 20px;
+  max-width:1500px;
+  margin:auto;
+}
+
+.beat-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+
+@media(max-width:1200px){
+  .beat-grid{grid-template-columns:repeat(3,1fr);}
+}
+@media(max-width:900px){
+  .beat-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:600px){
+  .beat-grid{grid-template-columns:1fr;}
+}
+
+.beat-card{
+  background:#15161d;
+  padding:18px;
+  border-radius:14px;
+  box-shadow:0 0 18px rgba(0,0,0,0.6);
+}
+
+.badge{
+  background:#ff3d3d;
+  display:inline-block;
+  padding:4px 8px;
+  border-radius:8px;
+  font-size:10px;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+iframe{
+  border-radius:8px;
+  margin:8px 0;
+}
+
+.button{
+  display:block;
+  text-align:center;
+  padding:9px;
+  border-radius:6px;
+  background:#2d2f3a;
+  color:#fff;
+  text-decoration:none;
+  font-size:13px;
+  margin-top:6px;
+  transition:0.2s;
+}
+
+.button:hover{
+  background:#44475a;
+}
+
+.note{
+  margin-top:50px;
+  font-size:13px;
+  color:#888;
+  line-height:1.6;
+  text-align:center;
+}
+
+footer{
+  text-align:center;
+  padding:35px;
+  color:#555;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Bakery Beats – Exclusive Vault</h1>
+  <p>
+    Official exclusive location. Each beat is sold only once and removed after purchase.
+  </p>
+</header>
+
+<!-- Loader shown under the banner while beats/iframes load -->
+<div id="loader" class="loader" role="status" aria-live="polite">
+  <div class="spinner" aria-hidden="true"></div>
+  <div class="loader-text">Beats loading...</div>
+</div>
+
+<section class="section">
+  <div class="beat-grid" id="beatGrid"></div>
+
+  <div class="note">
+    All productions are exclusive releases by Elroy Bakker.
+    Some may be created using AI-assisted workflows and professionally finalized.
+  </div>
+</section>
+
+<footer>
+  © 2026 Bakery Beats — Exclusive Vault
+</footer>
+
+<script>
+
+const beats = [
+  { id:"1X8CtYwOFyvVLDOJmvCktxhnBeCyfgVnh", title:"Bedroom Breeze ", bpm:85, key:"", mood:"Warm afrobeats/R&B hybrid at 85 BPM" },
+  { id:"1fqHMH982qvBSQv8kO3RXnzNC2U3GdhDo", title:"Bedroom Breeze 2", bpm:85, key:"", mood:"Warm afrobeats/R&B hybrid" },
+  { id:"1IA2o38KCbsJzhy7VgqqbZ194doCSPRnF", title:"City Lights Glow", bpm:"110", key:"", mood:"uk garage, dancehall, afrobeats" },
+  { id:"1JSXdEtpfTEj58dLcf5CACO5LxLRJ6tKH", title:"Ghost in club", bpm:"110", key:"", mood:"uk garage, dancehall, afrobeats" },
+  { id:"1wDKlCOSPD2V2jK0zoTTKd1-_raZHMft4", title:"Londen  banger", bpm:"105", key:"", mood:"afrobeats, highlife, afroswing" },
+  { id:"1wWMsyajdqOv5-Vw_9qP6J2lRw5VevGCB", title:"Londen lights", bpm:"105", key:"", mood:"afrobeats, highlife, afroswing" },
+  { id:"1Xlch7JaAYrI5f8qfifoOUfZ7eoaMNNAP", title:"Londen lights 2", bpm:"105", key:"", mood:"dancehall, jazz, uk garage, afroswing" },
+  { id:"1UuWCmnYRpb0aO0p8hUwcd5BK98qYlqSU", title:"Londen slank", bpm:"105", key:"", mood:"dancehall, uk garage, afroswing" },
+  { id:"1v2Y5VhhhjGL4B8rrkfQxuKEu9OMQAR7X", title:"Night Whispers", bpm:"105", key:"", mood:"soul, neo-soul, afroswing" },
+  { id:"1mdHyLFDqVejoQeZACPtuz_AC_tJw450Q", title:"Night Whispers 2", bpm:"105", key:"", mood:"soul, neo-soul, afroswing" },
+  { id:"1nDFq7d1H1y97jNJOSIBnXd5Nw5lrQI2Q", title:"Requiem of the Streets", bpm:"70", key:"", mood:"trap, classical guitar trap fusion" },
+  { id:"1pYe4lfw53Igb401X0o0fwqNmASzcBwTd", title:"Rude Boy Anthem", bpm:"110", key:"", mood:"dancehall, afrobeats, uk garage" },
+  { id:"1T5GzSVjlZGR_e0yPDr-TZrlDZc8rEOkv", title:"Rude Boy Anthem 2", bpm:"110", key:"", mood:"dancehall, afrobeats, uk garage" },
+  { id:"1tEmFApucYokZc8e5fCgbqumNFmbpUBD8", title:"Shadow groove", bpm:"105", key:"", mood:"grime, uk garage, dark afroswing" },
+  { id:"1QGUyEEunXf5QMPES6WswXYBcHktCqT31", title:"Shadow Puppet Symphony", bpm:"70", key:"", mood:"trap, classical, rap" },
+  { id:"1Ufpbvr6Dpiw05UvST0Ct_KeelZvZ2Ww1", title:"Shadow Whispers", bpm:"70", key:"", mood:"trap, hip hop" },
+  { id:"1x55GD_CC-DeUJviOeFBHLHCZQFx0RZ34", title:"Shadow Whispers 2", bpm:"70", key:"", mood:"trap, hip hop" },
+  { id:"1-TfiyMAPonK8cixUywA3ZK2Jl8iRS-CM", title:"Shadow Whispers 3", bpm:"", key:"", mood:"afrobeats, uk garage, tropical" },
+  { id:"1aR3u3kHx4ufzHAkHzAcbHWQOUU-0XtNr", title:"Shadows in the Key of Blue", bpm:"70", key:"—", mood:"neo-soul trap, dark trap, jazz" },
+  { id:"1zvDcWKOVcppV1sR13XwW1zPK-da4R2mF", title:"Shadows on the Thames", bpm:"70", key:"", mood:"neo-soul trap, dark trap, jazz" },
+  { id:"1ofPzGypJJUXw080G8i6ZOQAfDnAVCJUN", title:"Shadowstep", bpm:"", key:"", mood:"uk garage, afrobeats, highlife" },
+  { id:"1mtkJbWhVhLdEtiAXTESlVXPwfJSlujvX", title:"Whispers of the Thames", bpm:"105", key:"", mood:"uk garage, afrobeats, afroswing" },
+  { id:"1w8pM1hxa6ND62-Zcpvb9aZDVLuDk_qIo", title:"Whispers of the Thames 2", bpm:"105", key:"", mood:"uk garage, afrobeats, afroswing" }
+];
+
+const grid = document.getElementById("beatGrid");
+const loader = document.getElementById('loader');
+let loadedCount = 0;
+const totalBeats = beats.length;
+
+function hideLoader(){
+  if(loader){
+    loader.classList.add('hidden');
+    loader.setAttribute('aria-hidden','true');
+  }
+}
+
+// Fallback: hide loader after 10s even if some iframes didn't fire load
+const loaderTimeout = setTimeout(()=>{
+  hideLoader();
+}, 10000);
+
+beats.forEach((beat)=>{
+  const card = document.createElement("div");
+  card.className="beat-card";
+
+  card.innerHTML=`
+    <div class="badge">Exclusive</div>
+    <h3>${beat.title}</h3>
+    <p>BPM: ${beat.bpm} | Key: ${beat.key}</p>
+    <p>Mood: ${beat.mood}</p>
+
+    <iframe src="https://drive.google.com/file/d/${beat.id}/preview"
+    width="100%" height="80" allow="autoplay"></iframe>
+
+    <a href="mailto:info@elroybakker.nl?subject=Exclusive License Request - ${beat.title}"
+    class="button">Request Exclusive License</a>
+  `;
+
+  grid.appendChild(card);
+
+  // Add load handler for the iframe to count when media is ready
+  const iframe = card.querySelector('iframe');
+  if(iframe){
+    // Some browsers may not fire load for cross-origin iframe previews; still attempt to listen
+    iframe.addEventListener('load', ()=>{
+      loadedCount++;
+      if(loadedCount >= totalBeats){
+        clearTimeout(loaderTimeout);
+        hideLoader();
+      }
+    });
+  }
+});
+
+// If there are no beats, hide loader immediately
+if(totalBeats === 0){
+  hideLoader();
+}
+
+</script>
+
+</body>
+</html>
